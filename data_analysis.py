@@ -32,7 +32,12 @@ class DS:
 
     def Model_year(self):
         self.The_year_highest_car=df['Model Year'].value_counts().idxmax()
+        self.Mean_of_electric_range=df['Electric Range'].mean()
         self.The_series_of_modelyear_Electricrange=df.groupby('Model Year')['Electric Range'].mean()
+        self.The_series_of_modelyear_Electricrange_bigger_than_1001=df.groupby('Model Year')['Electric Range'].mean()>self.Mean_of_electric_range
+        self.The_series_of_modelyear_Electricrange_bigger_than_100=self.The_series_of_modelyear_Electricrange_bigger_than_1001[self.The_series_of_modelyear_Electricrange_bigger_than_1001==True].index
+        print("The list:")
+        print(','.join(map(str,self.The_series_of_modelyear_Electricrange_bigger_than_100)))
         print(f"The year {self.The_year_highest_car} has the highest of car.")
 
     def ten_cars_has_highest_electric_range(self):
@@ -43,6 +48,19 @@ class DS:
         print("The dataframe of something information of ten cars:")
         print(self.information_of_ten_car)
 
+    def state_of_vehicles(self):
+        self.maximum_of_vehicles_at_states=df['State'].value_counts().idxmax()
+        print(f"The {self.maximum_of_vehicles_at_states} has the highest of vehicles:")
+
+    def City(self):
+        self.The_five_highest_city_car=df['City'].value_counts()[:5].index
+        print("These five cities has the maximum members of cars:")
+        print(','.join(self.The_five_highest_city_car))
+
+    def County(self):
+        self.counts_county=df['County'].value_counts()
+        self.Onehundred_at_least_cars_in_county=df[df['County'].isin(self.counts_county[self.counts_county>=100].index)].groupby('County')['Electric Range'].mean()
+        print(f"The list of Vehicles of County and Mean of Electric Range\n {self.Onehundred_at_least_cars_in_county}")
 my_ds=DS()
 
 my_ds.maximum_member_of_car()
@@ -50,3 +68,6 @@ my_ds.max_model()
 my_ds.Electric_range()
 my_ds.Model_year()
 my_ds.ten_cars_has_highest_electric_range()
+my_ds.state_of_vehicles()
+my_ds.City()
+my_ds.County()
