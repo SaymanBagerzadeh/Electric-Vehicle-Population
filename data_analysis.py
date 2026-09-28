@@ -61,6 +61,19 @@ class DS:
         self.counts_county=df['County'].value_counts()
         self.Onehundred_at_least_cars_in_county=df[df['County'].isin(self.counts_county[self.counts_county>=100].index)].groupby('County')['Electric Range'].mean()
         print(f"The list of Vehicles of County and Mean of Electric Range\n {self.Onehundred_at_least_cars_in_county}")
+
+    def Model_of_vehicles(self):
+        self.maximum_of_make_model=df.groupby('Make')['Model'].value_counts().idxmax[0]
+        print(f"The {self.maximum_of_model} has the highest Model")
+
+    def Has_the_highest_of_Meanelectricrange(self):
+        self.list_cars=df[df['Electric Range'] > df['Electric Range'].mean()]
+        print(f"{self.list_cars} has the highest of cars in list.") 
+
+    def Electric_Utility(self):
+        self.Five_highest_cars=df['Electric Utility'].value_counts().sort_values().tail(5).index
+        print(f"The five Electric utilities has highest cars:")
+        print(','.join(self.Five_highest_cars))
 my_ds=DS()
 
 my_ds.maximum_member_of_car()
@@ -71,3 +84,4 @@ my_ds.ten_cars_has_highest_electric_range()
 my_ds.state_of_vehicles()
 my_ds.City()
 my_ds.County()
+my_ds.Electric_Utility()
