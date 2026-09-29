@@ -74,8 +74,30 @@ class DS:
         self.Five_highest_cars=df['Electric Utility'].value_counts().sort_values().tail(5).index
         print(f"The five Electric utilities has highest cars:")
         print(','.join(self.Five_highest_cars))
-my_ds=DS()
 
+    def The_brand_has_the_unique_vehicles(self):
+        self.Max_unique_vehicles=df.groupby('Make')['Model'].nunique().idxmax()
+        print(f"Brand {self.Max_unique_vehicles} has the widest variety of models.")
+
+    def In_state_Make_has_highest_car(self):
+        self.bishtarin=df.groupby(['State','Make']).size().groupby(level=0).idxmax()
+        print("List of states make has highest car:")
+        print(f"{self.bishtarin}")
+
+    def every_Model_year_has_highest_car(self):
+        self.bishtarin=df.groupby(['Model Year','Make']).size().groupby(level=0).idxmax()
+        print("list for every model year has highest cars:")
+        print(f"{self.bishtarin}")
+    def zero_electric_range(self):
+        self.list_zero_electric_range_cars=df[df['Electric Range']==0]
+        self.make_has_biggest_cars=self.list_zero_electric_range_cars['Make'].value_counts().idxmax()
+        print(f"{self.make_has_biggest_cars} has the highest cars in list of zero electric range")
+    def divide_range_cars(self):
+        self.high_list=df[df['Electric Range']>=112]
+        self.mid_list=df[(df['Electric Range']<112) & (df['Electric Range']>36)]
+        self.low_list=df[df['Electric Range']<=36]
+        pd.DataFrame().to_json(self.high_list)
+my_ds=DS()
 my_ds.maximum_member_of_car()
 my_ds.max_model()
 my_ds.Electric_range()
@@ -85,3 +107,7 @@ my_ds.state_of_vehicles()
 my_ds.City()
 my_ds.County()
 my_ds.Electric_Utility()
+my_ds.The_brand_has_the_unique_vehicles()
+my_ds.In_state_Make_has_highest_car()
+my_ds.every_Model_year_has_highest_car()
+my_ds.zero_electric_range()
