@@ -96,7 +96,12 @@ class DS:
         self.high_list=df[df['Electric Range']>=112]
         self.mid_list=df[(df['Electric Range']<112) & (df['Electric Range']>36)]
         self.low_list=df[df['Electric Range']<=36]
-        pd.DataFrame().to_json(self.high_list)
+    
+    def save_file(self):
+        print("Saving..")
+        pd.DataFrame(self.high_list).to_excel('high_list.xlsx',index=False)
+        pd.DataFrame(self.mid_list).to_excel('mid_list.xlsx',index=False)
+        pd.DataFrame(self.low_list).to_excel('low_list.xlsx',index=False)
 my_ds=DS()
 my_ds.maximum_member_of_car()
 my_ds.max_model()
@@ -111,3 +116,5 @@ my_ds.The_brand_has_the_unique_vehicles()
 my_ds.In_state_Make_has_highest_car()
 my_ds.every_Model_year_has_highest_car()
 my_ds.zero_electric_range()
+my_ds.divide_range_cars()
+my_ds.save_file()
