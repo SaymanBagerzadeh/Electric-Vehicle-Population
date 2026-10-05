@@ -75,3 +75,19 @@ class Data_visulation:
             Ten_high_County=df['County'].value_counts().sort_values().tail(10)
             sns.barplot(self.Ten_high_County,color='yellow')
             plt.gcf().autofmt_xdate()
+
+        def Electric_vehicle_type(self):
+            sns.histplot(x='Electric Range',data=df,hue='Electric Vehicle Type',binwidth=15)
+            plt.savefig('Electric_range_for_vehicle_type')
+
+        def ten_brands_electric_range(self):
+            self.list_ten_brands=df['Make'].value_counts().sort_values().tail(10).index
+            sns.boxplot(x='Make',y='Electric Range',data=df,order=self.list_ten_brands)
+            plt.gcf().autofmt_xdate()
+            plt.savefig('Ten_high_brands_electricrange.png')
+
+        def violon_electricvehicle_for_electricrange(self):
+            sns.violinplot(x='Electric Vehicle Type',y='Electric Range',data=df)
+            plt.gcf().autofmt_xdate()
+
+        
