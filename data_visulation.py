@@ -90,4 +90,35 @@ class Data_visulation:
             sns.violinplot(x='Electric Vehicle Type',y='Electric Range',data=df)
             plt.gcf().autofmt_xdate()
 
-        
+        def reg_plot(self):
+            sns.regplot(x='Model Year',y='Electric Range',data=df)
+
+        def miangin_electric_range(self):
+            self.top10=df['Make'].value_counts().head(10).index
+            self.listt=self.list_of_electric_and_counts=df[df['Make'].isin(self.top10)].groupby('Make').agg(
+                car_count=('Make','size')
+                ,ele_range=('Electric Range','mean'))
+            sns.barplot(x='car_count',y='ele_range',data=self.listt)
+
+        def miangin_for_county(self):
+            list_county=df['County'].value_counts()
+            df_county=df[df['County'].isin(list_county[list_county>=100].index)]
+            plt.figure(figsize=(12,8))
+            sns.barplot(x='Electric Range',y='County',data=df_county)
+            plt.tight_layout()
+            plt.show()
+
+        def Modelyear_by_electric_range(self):
+            sns.lineplot(x='Electric Range',y='Model Year',data=df,color='green')
+            plt.tight_layout()
+            plt.show()
+
+        def top10_brand_electric_range(self):
+            list_of_top_10=df['Make'].value_counts().head(10).index
+            list_electricrange_top10=df[df['Make'].isin(list_of_top_10)]
+            sns.boxplot(x='Make',y='Electric Range',data=list_electricrange_top10)
+            plt.gcf().autofmt_xdate()
+            plt.tight_layout()
+            plt.show()
+
+        def 
