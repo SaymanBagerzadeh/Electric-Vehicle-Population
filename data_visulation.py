@@ -121,4 +121,18 @@ class Data_visulation:
             plt.tight_layout()
             plt.show()
 
-        def 
+        def electric_range_by_vehicletype_modelyear(self):
+            fig,(ax1,ax2)=plt.subplots(nrows=2,ncols=1,figsize=(10,10))
+            types_electric_range=df.groupby('Electric Vehicle Type')['Electric Range'].mean()
+            ax1.bar(types_electric_range.index,types_electric_range.values)
+            ax1.set_xlabel('Electric Vehicle Type')
+            ax1.set_title('Mean of Electric Range by Electric Vehicle Type')
+            types_model_year=df.groupby('Model Year')['Electric Range'].mean()
+            ax2.bar(types_model_year.index,types_model_year.values)
+            ax2.set_xlabel('Model Year')
+            ax2.set_title('Mean of Electric Range by Model Year')
+            plt.ylabel('Mean of Electric Range')
+            plt.tight_layout()
+            plt.show()
+
+        
