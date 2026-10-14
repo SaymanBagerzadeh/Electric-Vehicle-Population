@@ -135,4 +135,26 @@ class Data_visulation:
             plt.tight_layout()
             plt.show()
 
-        
+        def finally_dashboard(self):
+            fig,ax=plt.subplots(nrows=2,ncols=2,figsize=(10,15))
+            ax[0,0].bar(top10.index,top10.values,color='red')
+            ax[0,0].set_title('Top 10 car brands')
+            ax[0,0].set_xlabel('Make')
+            ax[0,0].set_ylabel('Number of cars')
+            ax[0,0].tick_params(axis='x',rotation=45)
+            ax[0,1].bar(members_of_cars_by_year.index,members_of_cars_by_year.values,color='yellow')
+            ax[0,1].set_title('Number of cars by Model Year')
+            ax[0,1].set_xlabel('Model Year')
+            ax[0,1].tick_params(axis='x',rotation=45)
+            sns.kdeplot(x=df['Electric Range'],data=df,ax=ax[1,0])
+            ax[1,0].set_title('Electric Range Distrubition')
+            ax[1,0].set_xlabel('Electric Range')
+            ax[1,0].set_ylabel('Density')
+            sns.histplot(data=df, x='Electric Vehicle Type',
+             ax=ax[1, 1], color='green')
+            ax[1, 1].set_title('Electric Vehicle Types')
+            ax[1, 1].set_xlabel('Vehicle Type')
+            ax[1, 1].set_ylabel('Number of Cars')
+            ax[1, 1].tick_params(axis='x', rotation=15)
+            plt.tight_layout()
+            plt.savefig('Thelastdashboard.png')
